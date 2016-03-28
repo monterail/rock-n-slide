@@ -41,15 +41,5 @@
       "gradient": "",
       "backgroundColor": ""
     }
-  ],
-  "finalSlide": {
-    "macBookSrc": "",
-    "likeText": "",
-    "likeTextClicked": "",
-    "backgroundColor": "",
-    "newsletterCaption1": "",
-    "newsletterCaption2": "",
-    "emailPlaceholer": "",
-    "submitButton": ""
-  }
+  ]
 }
