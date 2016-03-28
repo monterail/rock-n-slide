@@ -1,0 +1,20 @@
+{
+  "name": "retrospective-2015",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Monterail <monterail@monterail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/monterail/retrospective-2015",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {}
+}
