@@ -1,0 +1,55 @@
+{
+  "menu": {
+    "backgroundImg": "",
+    "gradient": "",
+    "backgroundColor": ""
+  },
+  "hero": {
+    "number": "",
+    "slot1": "",
+    "slot2": "",
+    "scrollingText": "",
+    "logoUrl": ""
+  },
+  "siteMeta": {
+    "title": "",
+    "description": "",
+    "faviconURLpng": "",
+    "faviconURLico": "",
+    "keywords": "",
+    "social": {
+      "imageUrl": "",
+      "title": "",
+      "siteName": "",
+      "description": "",
+      "siteUrl": "",
+      "fbAppId": ""
+    }
+  },
+  "social": {
+    "twitterText": "",
+    "website": "",
+    "via": ""
+  },
+  "slides": [
+    {
+      "menuItem": "",
+      "slot1": "",
+      "slot2": "",
+      "slot3": "",
+      "backgroundImg": "",
+      "gradient": "",
+      "backgroundColor": ""
+    }
+  ],
+  "finalSlide": {
+    "macBookSrc": "",
+    "likeText": "",
+    "likeTextClicked": "",
+    "backgroundColor": "",
+    "newsletterCaption1": "",
+    "newsletterCaption2": "",
+    "emailPlaceholer": "",
+    "submitButton": ""
+  }
+}
