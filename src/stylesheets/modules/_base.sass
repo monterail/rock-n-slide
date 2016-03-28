@@ -1,0 +1,29 @@
+body
+  font-family: 'Lato', sans-serif
+  min-width: 320px
+  color: $base-text-color
+  &:after,
+  &:before
+    content: ""
+    position: fixed
+    height: 25px
+    left: 0
+    right: 0
+    z-index: 9
+    background-color: #fff
+    @media screen and (max-width: 640px)
+      height: 10px
+
+  &:before
+    top: 0
+
+  &:after
+    bottom: 0
+
+.frame
+  position: relative
+  padding: 25px
+  overflow: auto
+  box-sizing: border-box
+  @media screen and (max-width: 640px)
+    padding: 10px

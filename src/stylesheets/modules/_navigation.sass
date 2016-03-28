@@ -1,0 +1,70 @@
+.mobile-menu__trigger
+  display: inline-block
+  position: fixed
+  top: 7px
+  left: 15px
+  z-index: 10
+  padding: 7px
+  background-color: #fff
+  @media screen and (max-width: 640px)
+    top: 0
+    left: 5px
+
+.mobile-menu__hamburger
+  list-style-type: none
+  margin: 0
+  padding: 0
+
+  .mobile-menu__hamburger-item
+    position: relative
+    top: 0
+    width: 26px
+    height: 3px
+    margin-top: 7px
+    background-color: #3a3a3a
+    transition: opacity .3s .4s ease
+
+    &:first-child
+      transition: top .5s .4s ease, transform .4s ease
+
+    &:last-child
+      transition: top .5s .4s ease, transform .4s ease
+
+.mobile-menu__trigger--active
+  .mobile-menu__hamburger
+    .mobile-menu__hamburger-item
+      opacity: 0
+
+      &:first-child
+        opacity: 1
+        top: 10px
+        transform: rotate(45deg)
+        transition: top .4s ease, transform .5s .4s ease
+
+      &:last-child
+        opacity: 1
+        top: -10px
+        transform: rotate(-45deg)
+        transition: top .4s ease, transform .5s .4s ease
+
+.mobile__menu
+  list-style-type: none
+  margin: 0
+  padding: 2em 0
+
+.mobile__menu-item
+  color: white
+
+a.mobile__menu-anchor
+  font-size: 30px
+  font-weight: 400
+  color: white
+  text-decoration: none
+  display: inline-block
+  line-height: 1.5em
+
+  &:before
+    content: none
+
+  strong
+    line-height: 3em

@@ -1,0 +1,221 @@
+.slide
+  height: 100vh
+  width: 100%
+  position: relative
+  overflow: hidden
+  // example background color
+  background-color: #F8F8F8
+
+  @media screen and (max-width: 1200px)
+    min-height: 450px
+
+  @media screen and (max-width: 1024px)
+    min-height: 450px
+
+  @media screen and (max-width: 768px)
+    min-height: 400px
+
+  @media screen and (max-width: 640px)
+    min-height: 380px
+
+  @media screen and (max-width: 540px)
+    min-height: 280px
+
+  svg
+    width: 0
+    height: 0
+    display: block
+
+.slide__content
+  text-align: center
+  position: absolute
+  display: block
+  top: 50%
+  left: 0
+  right: 0
+  transform: translate3d(0, -50%, 0)
+  z-index: 3
+  padding: 0 20px
+
+  a
+    position: relative
+    &:before
+      content: ''
+      width: 100%
+      height: 3px
+      position: absolute
+      bottom: 0
+      background-color: $base-text-color
+
+    &.strong__underline
+      &:before
+        height: 7px
+
+  &.text-color--white
+    h1, h2, h3, p, span
+      color: white
+
+    a:before
+      background-color: white
+
+
+  .slide__content-logo
+    max-width: 76px
+    height: auto
+    margin-top: 30px
+
+    @media screen and (max-width: 540px)
+      max-width: 40px
+
+.slide-background
+  height: 100%
+  width: 100%
+  background-repeat: no-repeat
+  background-position: center
+  background-size: cover
+  position: relative
+  overflow: hidden
+  z-index: 1
+
+.slide--hero
+  .slide__scrolling-text
+    position: fixed
+    bottom: 10px
+    left: 0
+    right: 0
+    text-align: center
+    z-index: 10
+    font-size: 24px
+    transition: opacity 0.4s ease
+
+    @media screen and (max-width: 640px)
+      font-size: 18px
+      bottom: 4px
+
+.slide--menu
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  width: auto
+  height: auto
+  opacity: 0
+  border: 25px solid white
+  z-index: -1
+  transition: z-index 0.4s step-end, opacity 0.4s ease
+  overflow: hidden
+  @media screen and (max-width: 640px)
+    border-width: 10px
+
+  &.slide--menu-active
+    z-index: 4
+    opacity: 1
+    transition: opacity 0.4s ease
+
+  .slide__content
+    padding-left: 10%
+    text-align: left
+    position: relative
+    overflow-y: auto
+    height: 100%
+    transform: none
+    top: 0
+
+  .slide-background
+    position: absolute
+    top: 0
+    background-size: cover
+    background-position: center center
+
+.slide--hero
+  h2
+    font-weight: 300
+    font-size: 45px
+
+    @media screen and (max-width: 768px)
+      font-size: 36px
+
+    @media screen and (max-width: 640px)
+      font-size: 32px
+
+    @media screen and (max-width: 540px)
+      font-size: 24px
+
+    @media screen and (max-width: 400px)
+      font-size: 18px
+
+
+.slide__number
+  font-size: 200px
+  font-weight: 700
+  color: $base-text-color
+  display: inline-block
+  line-height: 1
+
+  @media screen and (max-width: 1200px)
+    font-size: 200px
+
+  @media screen and (max-width: 1024px)
+    font-size: 180px
+
+  @media screen and (max-width: 768px)
+    font-size: 160px
+
+  @media screen and (max-width: 640px)
+    font-size: 140px
+
+  @media screen and (max-width: 540px)
+    font-size: 96px
+
+  @media screen and (max-width: 400px)
+    font-size: 86px
+
+  @media screen and (max-width: 320px)
+    font-size: 72px
+
+.slide__number--hero
+  font-size: 240px
+  font-weight: 900
+  color: $color-red
+  margin: 0
+  line-height: 1
+
+  @media screen and (max-width: 1200px)
+    font-size: 200px
+
+  @media screen and (max-width: 1024px)
+    font-size: 180px
+
+  @media screen and (max-width: 768px)
+    font-size: 160px
+
+  @media screen and (max-width: 640px)
+    font-size: 140px
+
+  @media screen and (max-width: 540px)
+    font-size: 96px
+
+  @media screen and (max-width: 400px)
+    font-size: 86px
+
+  @media screen and (max-width: 320px)
+    font-size: 72px
+
+// Fallback for IE because
+// of not supported gradientmaps
+.ie
+  .slide
+    .slide-background__color
+      position: absolute
+      opacity: 0.6
+      display: block
+      z-index: 2
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+
+.slide-background__gradient
+  &+.slide-background__color
+    display: none
