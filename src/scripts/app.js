@@ -2,6 +2,14 @@ require('./gradientmaps.min.js');
 var animateScroll = require('./animatescroll.min.js');
 require('waypoints');
 
+// Is it IE?
+(function(){
+  var ieRegex = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+  if(ieRegex.exec(navigator.userAgent) != null){
+    body.classList.add('ie');
+  }
+})();
+
 // Mobile
 var body = document.getElementsByTagName('body')[0],
 mobileMenuTrigger = document.getElementsByClassName('mobile-menu__trigger')[0],
@@ -12,20 +20,13 @@ menuItem = document.getElementsByClassName('mobile__menu-anchor'),
 isMenuOpen = false,
 slideIndex = 0;
 
-//Add target=_blank to all links except menu links
+// Add target=_blank to all links except menu links
+// Find way to do it inside markdown
 var links = document.getElementsByTagName('a');
 for (var elem = 0; elem < links.length; elem++) {
   if (!links[elem].classList.contains('mobile__menu-anchor'))
     links[elem].setAttribute('target', '_blank');
 }
-
-var IEmode = function(){
-  var ieRegex = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
-  if(ieRegex.exec(navigator.userAgent) != null){
-    body.classList.add('ie');
-  }
-}
-IEmode();
 
 var toggleVisibility = function(elem) {
   if (typeof elem !== "undefined" && elem !== null) {
@@ -63,14 +64,11 @@ var lazyImage = function(){
   }
 };
 
-var frame, slides, snapPoints;
+var frame, slides;
 function assignSnapVariables (){
   frame = document.getElementsByClassName('frame')[0];
   slides = frame.getElementsByClassName('slide');
-  snapPoints = [];
   for(var i = 0; i < slides.length; i++){
-    // minus body border top
-    snapPoints.push(slides[i].offsetTop);
     new Waypoint({
       element: slides[i],
       handler: lazyImage,
@@ -80,22 +78,20 @@ function assignSnapVariables (){
 }
 assignSnapVariables();
 
-function calculateNearestSlideIndex () {
-  var result,
-  offset = (window.innerHeight - 50)/-2,
-  substractArray = [];
-  for(var i = 0; i < snapPoints.length; i++){
-    result = snapPoints[i] - getOffsetY();
-    if(snapPoints[i] - getOffsetY() < offset){
-      // Assign huge number that will never
-      // be minimum in array
-      result = 999999999999;
-    }
-    substractArray.push(result);
+function calculateNearestSlide(dir) {
+  var windowHeight = window.innerHeight - 50,
+  value = Math.round(getOffsetY() / windowHeight) * windowHeight;
+  switch (dir) {
+    case "up":
+      return Math.max(0, value - 1);
+      break;
+    case "down":
+      return Math.min(value + 1, windowHeight);
+      break;
+    default:
+      return value;
   }
-  return slideIndex = substractArray.indexOf(Math.min.apply(Math, substractArray));
 };
-calculateNearestSlideIndex();
 
 window.onscroll = function(){
   toggleVisibility(scrollText);
@@ -103,11 +99,9 @@ window.onscroll = function(){
 
 window.onresize = function(){
   assignSnapVariables();
-  calculateNearestSlideIndex();
 }
 
 window.onkeydown = function(e){
-  calculateNearestSlideIndex();
   if(e.keyCode == 38){
     if(slideIndex < 1){
       return false;
