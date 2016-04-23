@@ -6,6 +6,7 @@
   z-index: 10
   padding: 7px
   background-color: $color-white
+
   @media #{$small-only}
     top: 0
     left: 5px
@@ -24,9 +25,7 @@
     background-color: $color-grey
     transition: opacity .3s .4s ease
 
-    &:first-child
-      transition: top .5s .4s ease, transform .4s ease
-
+    &:first-child,
     &:last-child
       transition: top .5s .4s ease, transform .4s ease
 
@@ -38,16 +37,15 @@
       &:first-child,
       &:last-child
         opacity: 1
+        transition: top .4s ease, transform .5s .4s ease
 
       &:first-child
         top: 10px
         transform: rotate(45deg)
-        transition: top .4s ease, transform .5s .4s ease
 
       &:last-child
         top: -10px
         transform: rotate(-45deg)
-        transition: top .4s ease, transform .5s .4s ease
 
 .mobile__menu
   list-style-type: none
