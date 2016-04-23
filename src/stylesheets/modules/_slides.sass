@@ -6,19 +6,19 @@
   // example background color
   background-color: #F8F8F8
 
-  @media screen and (max-width: 1200px)
+  @media #{$x-large-only}
     min-height: 450px
 
-  @media screen and (max-width: 1024px)
+  @media #{$large-only}
     min-height: 450px
 
-  @media screen and (max-width: 768px)
+  @media #{$medium-only}
     min-height: 400px
 
-  @media screen and (max-width: 640px)
+  @media #{$small-only}
     min-height: 380px
 
-  @media screen and (max-width: 540px)
+  @media #{$x-small-only}
     min-height: 280px
 
   svg
@@ -64,7 +64,7 @@
     height: auto
     margin-top: 30px
 
-    @media screen and (max-width: 540px)
+    @media #{$x-small-only}
       max-width: 40px
 
 .slide-background
@@ -89,7 +89,7 @@
     font-size: 24px
     transition: opacity 0.4s ease
 
-    @media screen and (max-width: 640px)
+    @media #{$small-only}
       font-size: 18px
       bottom: 4px
 
@@ -106,7 +106,7 @@
   z-index: -1
   transition: z-index 0.4s step-end, opacity 0.4s ease
   overflow: hidden
-  @media screen and (max-width: 640px)
+  @media #{$small-only}
     border-width: 10px
 
   &.slide--menu-active
@@ -134,16 +134,16 @@
     font-weight: 300
     font-size: 45px
 
-    @media screen and (max-width: 768px)
+    @media #{$medium-only}
       font-size: 36px
 
-    @media screen and (max-width: 640px)
+    @media #{$small-only}
       font-size: 32px
 
-    @media screen and (max-width: 540px)
+    @media #{$x-small-only}
       font-size: 24px
 
-    @media screen and (max-width: 400px)
+    @media #{$xx-small-only}
       font-size: 18px
 
 
@@ -154,25 +154,25 @@
   display: inline-block
   line-height: 1
 
-  @media screen and (max-width: 1200px)
+  @media #{$x-large-only}
     font-size: 200px
 
-  @media screen and (max-width: 1024px)
+  @media #{$large-only}
     font-size: 180px
 
-  @media screen and (max-width: 768px)
+  @media #{$medium-only}
     font-size: 160px
 
-  @media screen and (max-width: 640px)
+  @media #{$small-only}
     font-size: 140px
 
-  @media screen and (max-width: 540px)
+  @media #{$x-small-only}
     font-size: 96px
 
-  @media screen and (max-width: 400px)
+  @media #{$xx-small-only}
     font-size: 86px
 
-  @media screen and (max-width: 320px)
+  @media #{$xxx-small-only}
     font-size: 72px
 
 .slide__number--hero
@@ -182,25 +182,25 @@
   margin: 0
   line-height: 1
 
-  @media screen and (max-width: 1200px)
+  @media #{$x-large-only}
     font-size: 200px
 
-  @media screen and (max-width: 1024px)
+  @media #{$large-only}
     font-size: 180px
 
-  @media screen and (max-width: 768px)
+  @media #{$medium-only}
     font-size: 160px
 
-  @media screen and (max-width: 640px)
+  @media #{$small-only}
     font-size: 140px
 
-  @media screen and (max-width: 540px)
+  @media #{$x-small-only}
     font-size: 96px
 
-  @media screen and (max-width: 400px)
+  @media #{$xx-small-only}
     font-size: 86px
 
-  @media screen and (max-width: 320px)
+  @media #{$xxx-small-only}
     font-size: 72px
 
 // Fallback for IE because
