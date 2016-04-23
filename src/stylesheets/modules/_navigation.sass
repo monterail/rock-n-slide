@@ -5,7 +5,7 @@
   left: 15px
   z-index: 10
   padding: 7px
-  background-color: #fff
+  background-color: $color-white
   @media screen and (max-width: 640px)
     top: 0
     left: 5px
@@ -21,7 +21,7 @@
     width: 26px
     height: 3px
     margin-top: 7px
-    background-color: #3a3a3a
+    background-color: $color-grey
     transition: opacity .3s .4s ease
 
     &:first-child
@@ -35,14 +35,16 @@
     .mobile-menu__hamburger-item
       opacity: 0
 
-      &:first-child
+      &:first-child,
+      &:last-child
         opacity: 1
+
+      &:first-child
         top: 10px
         transform: rotate(45deg)
         transition: top .4s ease, transform .5s .4s ease
 
       &:last-child
-        opacity: 1
         top: -10px
         transform: rotate(-45deg)
         transition: top .4s ease, transform .5s .4s ease
@@ -53,12 +55,12 @@
   padding: 2em 0
 
 .mobile__menu-item
-  color: white
+  color: $color-white
 
 a.mobile__menu-anchor
   font-size: 30px
   font-weight: 400
-  color: white
+  color: $color-white
   text-decoration: none
   display: inline-block
   line-height: 1.5em

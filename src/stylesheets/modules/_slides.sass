@@ -53,10 +53,10 @@
 
   &.text-color--white
     h1, h2, h3, p, span
-      color: white
+      color: $color-white
 
     a:before
-      background-color: white
+      background-color: $color-white
 
 
   .slide__content-logo
@@ -70,9 +70,10 @@
 .slide-background
   height: 100%
   width: 100%
-  background-repeat: no-repeat
-  background-position: center
-  background-size: cover
+  background:
+    repeat: no-repeat
+    position: center
+    size: cover
   position: relative
   overflow: hidden
   z-index: 1
@@ -80,9 +81,9 @@
 .slide--hero
   .slide__scrolling-text
     position: fixed
-    bottom: 10px
     left: 0
     right: 0
+    bottom: 10px
     text-align: center
     z-index: 10
     font-size: 24px
@@ -101,7 +102,7 @@
   width: auto
   height: auto
   opacity: 0
-  border: 25px solid white
+  border: 25px solid $color-white
   z-index: -1
   transition: z-index 0.4s step-end, opacity 0.4s ease
   overflow: hidden
