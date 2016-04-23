@@ -1,0 +1,20 @@
+a.mobile-menu__trigger(href="#")
+  ul.mobile-menu__hamburger
+    li.mobile-menu__hamburger-item
+    li.mobile-menu__hamburger-item
+    li.mobile-menu__hamburger-item
+
+.slide.slide--menu
+  .slide__content
+    ul.mobile__menu
+      each slide, index in file.slides
+        li.mobile__menu-item
+          a.mobile__menu-anchor(href="##{index}")
+            if slide.menuItem
+              span !{slide.menuItem}
+  if file.menu.backgroundImg && file.menu.gradient
+    .slide-background.slide-background__image.slide-background__gradient(style="background-image: url("+ file.menu.backgroundImg +");" data-gradient=file.menu.gradient)
+  if file.menu.backgroundImg && !file.menu.gradient
+    .slide-background.slide-background__image(style="background-image: url("+ file.menu.backgroundImg +");")
+  if file.menu.backgroundColor
+    .slide-background.slide-background__color(style="background-color: "+ file.menu.backgroundColor +";")

@@ -1,0 +1,23 @@
+meta(charset='utf-8')
+meta(http-equiv='X-UA-Compatible', content='IE=edge')
+title !{file.siteMeta.title}
+meta(name="description", content=file.siteMeta.description)
+meta(name="keywords", content=file.siteMeta.keywords)
+meta(name='viewport', content='width=device-width, initial-scale=1')
+//- Facebook Open Grah meta
+meta(property="og:image" content=file.siteMeta.social.imageUrl)
+meta(property="og:title" content=file.siteMeta.social.title)
+meta(property="og:site_name" content=file.siteMeta.social.siteName)
+meta(property="og:description" content=file.siteMeta.social.description)
+meta(property="og:url" content=file.siteMeta.social.siteUrl)
+//- Twitter meta tags
+meta(property="twitter:image" content=file.siteMeta.social.imageUrl)
+meta(property="twitter:title" content=file.siteMeta.social.title)
+meta(property="twitter:description" content=file.siteMeta.social.description)
+
+if file.siteMeta.faviconURLpng && file.siteMeta.faviconURLpng.length > 0
+  link(name="favicon" rel="icon" type="image/png" href=file.siteMeta.faviconURLpng)
+if file.siteMeta.faviconURLico && file.siteMeta.faviconURLico.length > 0
+  link(name="favicon" rel="icon" type="image/x-icon" href=file.siteMeta.faviconURLico)
+
+link(rel="stylesheet", href="stylesheets/main.css")

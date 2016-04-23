@@ -1,0 +1,48 @@
+mixin slideMarkdown(slide)
+  if slide.number && slide.number.length > 0
+    span.slide__number.typo--number !{slide.number}
+  if slide.slot1 && slide.slot1.length > 0
+    !=md(slide.slot1)
+  if slide.slot2 && slide.slot2.length > 0
+    !=md(slide.slot2)
+  if slide.slot3 && slide.slot3.length > 0
+    !=md(slide.slot3)
+
+mixin slide(slide, index)
+  .slide(id=index)
+    if slide.whiteColor
+      .slide__content.text-color--white
+        +slideMarkdown(slide)
+    else
+      .slide__content
+        +slideMarkdown(slide)
+    if slide.backgroundImg && slide.gradient
+      .slide-background.slide-background__image.slide-background__gradient(data-style="background-image: url("+ slide.backgroundImg +");" data-gradient=slide.gradient)
+    if slide.backgroundImg && !slide.gradient
+      .slide-background.slide-background__image(data-style="background-image: url("+ slide.backgroundImg +");")
+    if slide.backgroundColor
+      .slide-background.slide-background__color(style="background-color: "+ slide.backgroundColor +";")
+
+.frame
+  .slide.slide--hero
+    .slide__content
+      h1.slide__number.slide__number--hero !{file.hero.number}
+      if file.hero.slot1
+        !=md(file.hero.slot1)
+      if file.hero.slot2
+        !=md(file.hero.slot2)
+      if file.hero.slot3
+        !=md(file.hero.slot3)
+      if file.hero.logoUrl
+        img.slide__content-logo(src=file.hero.logoUrl)
+    if file.hero.scrollingText
+      .slide__scrolling-text !{file.hero.scrollingText}
+    if file.hero.backgroundImg && file.hero.gradient && !file.hero.backgroundColor
+      .slide-background.slide-background__image.slide-background__gradient(style="background-image: url("+ file.hero.backgroundImg +");" data-gradient=file.hero.gradient)
+    if file.hero.backgroundImg && !file.hero.gradient && !file.hero.backgroundColor
+      .slide-background.slide-background__image(style="background-image: url("+ file.hero.backgroundImg +");")
+    if file.hero.backgroundColor && !file.hero.backgroundImg && !file.hero.gradient
+      .slide-background.slide-background__color(style="background-color: "+ file.hero.backgroundColor +";")
+
+  each slide, index in file.slides
+    +slide(slide, index)

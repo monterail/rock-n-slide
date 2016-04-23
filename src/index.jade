@@ -1,107 +1,11 @@
-mixin slideMarkdown(slide)
-  if slide.number && slide.number.length > 0
-    span.slide__number.typo--number !{slide.number}
-  if slide.slot1 && slide.slot1.length > 0
-    !=md(slide.slot1)
-  if slide.slot2 && slide.slot2.length > 0
-    !=md(slide.slot2)
-  if slide.slot3 && slide.slot3.length > 0
-    !=md(slide.slot3)
-
-mixin slide(slide, index)
-  .slide(id=index)
-    if slide.whiteColor
-      .slide__content.text-color--white
-        +slideMarkdown(slide)
-    else
-      .slide__content
-        +slideMarkdown(slide)
-    if slide.backgroundImg && slide.gradient
-      .slide-background.slide-background__image.slide-background__gradient(data-style="background-image: url("+ slide.backgroundImg +");" data-gradient=slide.gradient)
-    if slide.backgroundImg && !slide.gradient
-      .slide-background.slide-background__image(data-style="background-image: url("+ slide.backgroundImg +");")
-    if slide.backgroundColor
-      .slide-background.slide-background__color(style="background-color: "+ slide.backgroundColor +";")
-
-mixin mobileMenu()
-  ul.mobile-menu__hamburger
-    li.mobile-menu__hamburger-item
-    li.mobile-menu__hamburger-item
-    li.mobile-menu__hamburger-item
-
 doctype
 html
   head
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    title !{file.siteMeta.title}
-    meta(name="description", content=file.siteMeta.description)
-    meta(name="keywords", content=file.siteMeta.keywords)
-    if file.siteMeta.faviconURLpng && file.siteMeta.faviconURLpng.length > 0
-      link(name="favicon" rel="icon" type="image/png" href=file.siteMeta.faviconURLpng)
-    if file.siteMeta.faviconURLico && file.siteMeta.faviconURLico.length > 0
-      link(name="favicon" rel="icon" type="image/x-icon" href=file.siteMeta.faviconURLico)
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    //- Facebook Open Grah meta
-    meta(property="og:image" content=file.siteMeta.social.imageUrl)
-    meta(property="og:title" content=file.siteMeta.social.title)
-    meta(property="og:site_name" content=file.siteMeta.social.siteName)
-    meta(property="og:description" content=file.siteMeta.social.description)
-    meta(property="og:url" content=file.siteMeta.social.siteUrl)
-    //- Twitter meta tags
-    meta(property="twitter:image" content=file.siteMeta.social.imageUrl)
-    meta(property="twitter:title" content=file.siteMeta.social.title)
-    meta(property="twitter:description" content=file.siteMeta.social.description)
-    link(rel="stylesheet", href="stylesheets/main.css")
-
+    include partials/meta-tags
   body
-    <!--[if lte IE 9]>
-    p.browsehappy
-      | You are using an <strong>outdated</strong> browser.
-      | Please <a href="http://browsehappy.com/">upgrade your browser</a>
-      | to improve your experience.
-    <![endif]-->
 
-    a.mobile-menu__trigger(href="#")
-      +mobileMenu
+    include partials/menu
 
-    .slide.slide--menu
-      .slide__content
-        ul.mobile__menu
-          each slide, index in file.slides
-            li.mobile__menu-item
-              a.mobile__menu-anchor(href="##{index}")
-                if slide.menuItem
-                  span !{slide.menuItem}
-      if file.menu.backgroundImg && file.menu.gradient
-        .slide-background.slide-background__image.slide-background__gradient(style="background-image: url("+ file.menu.backgroundImg +");" data-gradient=file.menu.gradient)
-      if file.menu.backgroundImg && !file.menu.gradient
-        .slide-background.slide-background__image(style="background-image: url("+ file.menu.backgroundImg +");")
-      if file.menu.backgroundColor
-        .slide-background.slide-background__color(style="background-color: "+ file.menu.backgroundColor +";")
-
-    .frame
-      .slide.slide--hero
-        .slide__content
-          h1.slide__number.slide__number--hero !{file.hero.number}
-          if file.hero.slot1
-            !=md(file.hero.slot1)
-          if file.hero.slot2
-            !=md(file.hero.slot2)
-          if file.hero.slot3
-            !=md(file.hero.slot3)
-          if file.hero.logoUrl
-            img.slide__content-logo(src=file.hero.logoUrl)
-        if file.hero.scrollingText
-          .slide__scrolling-text !{file.hero.scrollingText}
-        if file.hero.backgroundImg && file.hero.gradient && !file.hero.backgroundColor
-          .slide-background.slide-background__image.slide-background__gradient(style="background-image: url("+ file.hero.backgroundImg +");" data-gradient=file.hero.gradient)
-        if file.hero.backgroundImg && !file.hero.gradient && !file.hero.backgroundColor
-          .slide-background.slide-background__image(style="background-image: url("+ file.hero.backgroundImg +");")
-        if file.hero.backgroundColor && !file.hero.backgroundImg && !file.hero.gradient
-          .slide-background.slide-background__color(style="background-color: "+ file.hero.backgroundColor +";")
-
-      each slide, index in file.slides
-        +slide(slide, index)
+    include partials/slides
 
     script(src="scripts/app.js")
