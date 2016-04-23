@@ -78,18 +78,27 @@ function assignSnapVariables (){
 }
 assignSnapVariables();
 
-function calculateNearestSlide(dir) {
+window.calculateNearestSlide = function(dir){
+  // There is something wrong with calculating after passing dir
   var windowHeight = window.innerHeight - 50,
-  value = Math.round(getOffsetY() / windowHeight) * windowHeight;
+  passSlides = Math.round(getOffsetY() / windowHeight),
+  nearest = Math.round(getOffsetY() / windowHeight) * windowHeight;
   switch (dir) {
     case "up":
-      return Math.max(0, value - 1);
-      break;
+      console.log(getOffsetY() % windowHeight);
+      if(getOffsetY() % windowHeight > windowHeight/2){
+        return Math.max(0, (passSlides - 1) * windowHeight);
+      }else{
+        return nearest;
+      }
     case "down":
-      return Math.min(value + 1, windowHeight);
-      break;
+      if(getOffsetY() % windowHeight > windowHeight/2){
+        return Math.min((passSlides + 1) * windowHeight, windowHeight);
+      }else{
+        return nearest;
+      }
     default:
-      return value;
+      return nearest;
   }
 };
 
@@ -106,12 +115,12 @@ window.onkeydown = function(e){
     if(slideIndex < 1){
       return false;
     }
-    animateScroll(slides[slideIndex-1], 400, 'easeInQuad');
+    animateScroll(calculateNearestSlide("up"), 400, 'easeInQuad');
   }else if(e.keyCode == 40 || e.keyCode == 32){
     if(slideIndex >= slides.length){
       return false;
     }
-    animateScroll(slides[slideIndex+1], 400, 'easeInQuad');
+    animateScroll(calculateNearestSlide("down"), 400, 'easeInQuad');
   }
 };
 
