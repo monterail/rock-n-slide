@@ -1,4 +1,4 @@
-.mobile-menu__trigger
+.menu-nav__trigger
   display: inline-block
   position: fixed
   top: 7px
@@ -11,12 +11,12 @@
     top: 0
     left: 5px
 
-.mobile-menu__hamburger
+.menu-nav__hamburger
   list-style-type: none
   margin: 0
   padding: 0
 
-  .mobile-menu__hamburger-item
+  .menu-nav__hamburger-item
     position: relative
     top: 0
     width: 26px
@@ -29,9 +29,9 @@
     &:last-child
       transition: top .5s .4s ease, transform .4s ease
 
-.mobile-menu__trigger--active
-  .mobile-menu__hamburger
-    .mobile-menu__hamburger-item
+.menu-nav__trigger--active
+  .menu-nav__hamburger
+    .menu-nav__hamburger-item
       opacity: 0
 
       &:first-child,
@@ -47,15 +47,15 @@
         top: -10px
         transform: rotate(-45deg)
 
-.mobile__menu
+.menu__nav
   list-style-type: none
   margin: 0
   padding: 2em 0
 
-.mobile__menu-item
+.menu__nav-item
   color: $color-white
 
-a.mobile__menu-anchor
+a.menu__nav-anchor
   font-size: 30px
   font-weight: 400
   color: $color-white

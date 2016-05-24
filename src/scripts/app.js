@@ -12,10 +12,10 @@ require('waypoints');
 
 // Mobile
 var body = document.getElementsByTagName('body')[0],
-mobileMenuTrigger = document.getElementsByClassName('mobile-menu__trigger')[0],
-mobileMenu = document.getElementsByClassName('slide--menu')[0],
+menuNavTrigger = document.getElementsByClassName('menu-nav__trigger')[0],
+navMenu = document.getElementsByClassName('slide--menu')[0],
 scrollText = document.getElementsByClassName('slide__scrolling-text')[0],
-menuItem = document.getElementsByClassName('mobile__menu-anchor'),
+menuItem = document.getElementsByClassName('menu__nav-anchor'),
 
 isMenuOpen = false,
 slideIndex = 0;
@@ -34,21 +34,21 @@ var toggleVisibility = function(elem) {
   }
 };
 
-var toggleMobileMenu = function() {
+var toggleNavMenu = function() {
   isMenuOpen = !isMenuOpen;
-  mobileMenuTrigger.classList.toggle('mobile-menu__trigger--active');
-  mobileMenu.classList.toggle('slide--menu-active');
+  menuNavTrigger.classList.toggle('menu-nav__trigger--active');
+  navMenu.classList.toggle('slide--menu-active');
   toggleVisibility(scrollText);
   body.classList.toggle('overflow--hide');
 };
 
-mobileMenuTrigger.addEventListener('click', function(e){
+menuNavTrigger.addEventListener('click', function(e){
   e.preventDefault();
-  toggleMobileMenu();
+  toggleNavMenu();
 });
 
 for (var i = 0; i < menuItem.length; i++) {
-  menuItem[i].addEventListener('click', toggleMobileMenu);
+  menuItem[i].addEventListener('click', toggleNavMenu);
 }
 
 var getOffsetY = function(){

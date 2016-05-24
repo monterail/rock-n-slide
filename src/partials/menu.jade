@@ -1,15 +1,15 @@
-a.mobile-menu__trigger(href="#")
-  ul.mobile-menu__hamburger
-    li.mobile-menu__hamburger-item
-    li.mobile-menu__hamburger-item
-    li.mobile-menu__hamburger-item
+a.menu-nav__trigger(href="#")
+  ul.menu-nav__hamburger
+    li.menu-nav__hamburger-item
+    li.menu-nav__hamburger-item
+    li.menu-nav__hamburger-item
 
 .slide.slide--menu
   .slide__content
-    ul.mobile__menu
+    ul.menu__nav
       each slide, index in file.slides
-        li.mobile__menu-item
-          a.mobile__menu-anchor(href="##{index}")
+        li.menu__nav-item
+          a.menu__nav-anchor(href="##{index}")
             if slide.menuItem
               span !{slide.menuItem}
   if file.menu.backgroundImg && file.menu.gradient
