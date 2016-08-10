@@ -1,6 +1,6 @@
-require('./gradientmaps.min.js');
-var animateScroll = require('./animatescroll.min.js');
-require('waypoints');
+require('./gradientmaps.min.js'); // Generator of gradientmap
+var animateScroll = require('./animatescroll.min.js'); // Pure JS animate scroll
+require('waypoints'); // Waypoints for lazy load animations
 
 // Is it IE?
 (function(){
@@ -12,16 +12,18 @@ require('waypoints');
 
 // Mobile
 var body = document.getElementsByTagName('body')[0],
-menuNavTrigger = document.getElementsByClassName('menu-nav__trigger')[0],
-navMenu = document.getElementsByClassName('slide--menu')[0],
+bodyBorder = Number(window.getComputedStyle(body, ':after').getPropertyValue('height').replace(/px$/, '')),
+mobileMenuTrigger = document.getElementsByClassName('menu-nav__trigger')[0],
+mobileMenu = document.getElementsByClassName('slide--menu')[0],
 scrollText = document.getElementsByClassName('slide__scrolling-text')[0],
-menuItem = document.getElementsByClassName('menu__nav-anchor'),
-
+menuItem = document.getElementsByClassName('mobile__menu-anchor'),
+windowHeight = window.innerHeight,
+documentHeight = window.innerHeight,
+offsetTop,
 isMenuOpen = false,
 slideIndex = 0;
 
-// Add target=_blank to all links except menu links
-// Find way to do it inside markdown
+// Add target=_blank to all links except menu links generated from json
 var links = document.getElementsByTagName('a');
 for (var elem = 0; elem < links.length; elem++) {
   if (!links[elem].classList.contains('mobile__menu-anchor'))
@@ -34,21 +36,21 @@ var toggleVisibility = function(elem) {
   }
 };
 
-var toggleNavMenu = function() {
+var toggleMobileMenu = function() {
   isMenuOpen = !isMenuOpen;
-  menuNavTrigger.classList.toggle('menu-nav__trigger--active');
-  navMenu.classList.toggle('slide--menu-active');
+  mobileMenuTrigger.classList.toggle('mobile-menu__trigger--active');
+  mobileMenu.classList.toggle('slide--menu-active');
   toggleVisibility(scrollText);
   body.classList.toggle('overflow--hide');
 };
 
-menuNavTrigger.addEventListener('click', function(e){
+mobileMenuTrigger.addEventListener('click', function(e){
   e.preventDefault();
-  toggleNavMenu();
+  toggleMobileMenu();
 });
 
 for (var i = 0; i < menuItem.length; i++) {
-  menuItem[i].addEventListener('click', toggleNavMenu);
+  menuItem[i].addEventListener('click', toggleMobileMenu);
 }
 
 var getOffsetY = function(){
@@ -58,7 +60,9 @@ var getOffsetY = function(){
 var lazyImage = function(){
   var backgroundImage = this.element.getElementsByClassName('slide-background__image')[0];
   if(backgroundImage){
-    var newAttributes = backgroundImage.getAttribute('style')+" "+ backgroundImage.getAttribute('data-style');
+    var newAttributes = backgroundImage.getAttribute('style') +
+      " " +
+      backgroundImage.getAttribute('data-style');
     backgroundImage.setAttribute('style', newAttributes);
     backgroundImage.removeAttribute('data-style');
   }
@@ -78,27 +82,16 @@ function assignSnapVariables (){
 }
 assignSnapVariables();
 
-window.calculateNearestSlide = function(dir){
-  // There is something wrong with calculating after passing dir
-  var windowHeight = window.innerHeight - 50,
-  passSlides = Math.round(getOffsetY() / windowHeight),
-  nearest = Math.round(getOffsetY() / windowHeight) * windowHeight;
+var calculateNearestSlide = function(dir){
+  var passSlides = Math.round(offsetTop / windowHeight);
+
   switch (dir) {
     case "up":
-      console.log(getOffsetY() % windowHeight);
-      if(getOffsetY() % windowHeight > windowHeight/2){
-        return Math.max(0, (passSlides - 1) * windowHeight);
-      }else{
-        return nearest;
-      }
+      return slides[passSlides - 1]
     case "down":
-      if(getOffsetY() % windowHeight > windowHeight/2){
-        return Math.min((passSlides + 1) * windowHeight, windowHeight);
-      }else{
-        return nearest;
-      }
+      return slides[passSlides + 1]
     default:
-      return nearest;
+      return slide[passSlides];
   }
 };
 
@@ -111,20 +104,27 @@ window.onresize = function(){
 }
 
 window.onkeydown = function(e){
+  documentHeight = document.body.clientHeight,
+  windowHeight = window.innerHeight,
+  offsetTop = getOffsetY();
   if(e.keyCode == 38){
-    if(slideIndex < 1){
+    e.preventDefault();
+    // improve limit sliding
+    if(offsetTop == 0)
       return false;
-    }
+
     animateScroll(calculateNearestSlide("up"), 400, 'easeInQuad');
   }else if(e.keyCode == 40 || e.keyCode == 32){
-    if(slideIndex >= slides.length){
+    e.preventDefault();
+    // improve limit sliding
+    if(offsetTop + windowHeight + bodyBorder >= documentHeight)
       return false;
-    }
+
     animateScroll(calculateNearestSlide("down"), 400, 'easeInQuad');
   }
 };
 
-//Apply Gradient Maps
+// Apply Gradient Maps
 var elemsWithGradients = document.querySelectorAll('[data-gradient]');
 for (var elem = 0; elem < elemsWithGradients.length; elem++) {
   var gradient = elemsWithGradients[elem].getAttribute('data-gradient');
