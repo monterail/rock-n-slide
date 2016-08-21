@@ -83,15 +83,18 @@ function assignSnapVariables (){
 assignSnapVariables();
 
 var calculateNearestSlide = function(dir){
-  var passSlides = Math.round(offsetTop / windowHeight);
+  var passSlides = Math.round(offsetTop / windowHeight),
+  currentSlide = slides[passSlides];
 
   switch (dir) {
     case "up":
-      return slides[passSlides - 1]
+      return offsetTop <= windowHeight / 2 ?
+        currentSlide : slides[passSlides - 1]
     case "down":
-      return slides[passSlides + 1]
+      return offsetTop >= documentHeight - (windowHeight * 1.5) ?
+        currentSlide : slides[passSlides + 1]
     default:
-      return slide[passSlides];
+      return currentSlide;
   }
 };
 
@@ -109,17 +112,9 @@ window.onkeydown = function(e){
   offsetTop = getOffsetY();
   if(e.keyCode == 38){
     e.preventDefault();
-    // improve limit sliding
-    if(offsetTop == 0)
-      return false;
-
     animateScroll(calculateNearestSlide("up"), 400, 'easeInQuad');
   }else if(e.keyCode == 40 || e.keyCode == 32){
     e.preventDefault();
-    // improve limit sliding
-    if(offsetTop + windowHeight + bodyBorder >= documentHeight)
-      return false;
-
     animateScroll(calculateNearestSlide("down"), 400, 'easeInQuad');
   }
 };
