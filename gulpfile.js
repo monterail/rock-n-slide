@@ -9,7 +9,9 @@ var gulp        = require('gulp'),
     browserify  = require('browserify'),
     del         = require('del'),
     argv        = require('yargs').argv,
-    marked      = require('marked');
+    marked      = require('marked'),
+    babelify    = require('babelify'),
+    debowerify  = require('debowerify');
 
 gulp.task('browser-sync', function() {
   browserSync({
@@ -57,8 +59,8 @@ gulp.task('js', function() {
     .pipe($.plumber())
     .pipe(through2.obj(function (file, enc, next) {
       browserify(file.path, { debug: true })
-        .transform(require('babelify'))
-        .transform(require('debowerify'))
+        .transform(babelify)
+        .transform(debowerify)
         .bundle(function (err, res) {
           if (err) { return next(err); }
           file.contents = res;

@@ -1,21 +1,12 @@
-var body = document.getElementsByTagName('body')[0],
-isMenuOpen = false,
-mobileMenuTrigger = document.getElementsByClassName('menu-nav__trigger')[0],
-mobileMenu = document.getElementsByClassName('slide--menu')[0],
-menuItem = document.getElementsByClassName('mobile__menu-anchor'),
-scrollText = document.getElementsByClassName('slide__scrolling-text')[0];
+let isMenuOpen = false;
+const mobileMenuTrigger = document.getElementsByClassName('menu-nav__trigger')[0];
+const mobileMenu = document.getElementsByClassName('slide--menu')[0];
+const menuItem = document.getElementsByClassName('menu__nav-anchor');
+const scrollText = document.getElementsByClassName('slide__scrolling-text')[0];
+import { toggleVisibility } from "./common.js";
+import body from "./common.js";
 
-var getOffsetY = function(){
-  return window.scrollY || window.pageYOffset;
-}
-
-var toggleVisibility = function(elem) {
-  if (typeof elem !== "undefined" && elem !== null) {
-    elem.style.opacity = getOffsetY() > 0 ? 0 : 1;
-  }
-};
-
-var toggleMobileMenu = function() {
+const toggleMobileMenu = () => {
   isMenuOpen = !isMenuOpen;
   mobileMenuTrigger.classList.toggle('menu-nav__trigger--active');
   mobileMenu.classList.toggle('slide--menu-active');
@@ -23,11 +14,11 @@ var toggleMobileMenu = function() {
   body.classList.toggle('overflow--hide');
 };
 
-mobileMenuTrigger.addEventListener('click', function(e){
+mobileMenuTrigger.addEventListener('click', e => {
   e.preventDefault();
   toggleMobileMenu();
 });
 
-for (var i = 0; i < menuItem.length; i++) {
+for (let i = 0; i < menuItem.length; i++) {
   menuItem[i].addEventListener('click', toggleMobileMenu);
 }

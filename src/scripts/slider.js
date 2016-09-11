@@ -1,55 +1,44 @@
 require('./vendor/gradientmaps.min.js'); // Generator of gradientmap
-var animateScroll = require('./vendor/animatescroll.min.js'); // Pure JS animate scroll
+import animateScroll from './vendor/animatescroll.min.js'; // Pure JS animate scroll
 require('waypoints'); // Waypoints for lazy load animations
 require('./mobile-menu.js');
 require('./common.js');
+import { toggleVisibility, getOffsetY } from "./common.js";
+import body from "./common.js";
+const frame = document.getElementsByClassName('frame')[0];
+const slides = frame.getElementsByClassName('slide');
 
 // Mobile
-var body = document.getElementsByTagName('body')[0],
-bodyBorder = Number(window.getComputedStyle(body, ':after').getPropertyValue('height').replace(/px$/, '')),
-scrollText = document.getElementsByClassName('slide__scrolling-text')[0],
-windowHeight = window.innerHeight,
-documentHeight = window.innerHeight,
-offsetTop,
-slideIndex = 0;
+const bodyBorder = Number(window.getComputedStyle(body, ':after').getPropertyValue('height').replace(/px$/, ''));
+const scrollText = document.getElementsByClassName('slide__scrolling-text')[0];
+let windowHeight = window.innerHeight;
+let documentHeight = window.innerHeight;
+let offsetTop;
+const slideIndex = 0;
 
-var getOffsetY = function(){
-  return window.scrollY || window.pageYOffset;
-};
-
-var toggleVisibility = function(elem) {
-  if (typeof elem !== "undefined" && elem !== null) {
-    elem.style.opacity = getOffsetY() > 0 ? 0 : 1;
-  }
-};
-
-var lazyImage = function(){
-  var backgroundImage = this.element.getElementsByClassName('slide-background__image')[0];
+const lazyImage = function(){
+  const backgroundImage = this.element.getElementsByClassName('slide-background__image')[0];
   if(backgroundImage){
-    var newAttributes = backgroundImage.getAttribute('style') +
-      " " +
-      backgroundImage.getAttribute('data-style');
+    const newAttributes = `${backgroundImage.getAttribute('style')} ${backgroundImage.getAttribute('data-style')}`;
     backgroundImage.setAttribute('style', newAttributes);
     backgroundImage.removeAttribute('data-style');
   }
 };
 
 function assignSnapVariables (){
-  var frame = document.getElementsByClassName('frame')[0],
-  slides = frame.getElementsByClassName('slide');
-  for(var i = 0; i < slides.length; i++){
+  for(let i = 0; i < slides.length; i++){
     new Waypoint({
       element: slides[i],
       handler: lazyImage,
       offset: '200%'
     })
-  };
+  }
 }
 assignSnapVariables();
 
-var calculateNearestSlide = function(dir){
-  var passSlides = Math.round(offsetTop / windowHeight),
-  currentSlide = slides[passSlides];
+const calculateNearestSlide = dir => {
+  const passSlides = Math.round(offsetTop / windowHeight);
+  const currentSlide = slides[passSlides];
 
   switch (dir) {
     case "up":
@@ -63,15 +52,15 @@ var calculateNearestSlide = function(dir){
   }
 };
 
-window.onscroll = function(){
+window.onscroll = () => {
   toggleVisibility(scrollText);
 };
 
-window.onresize = function(){
+window.onresize = () => {
   assignSnapVariables();
 }
 
-window.onkeydown = function(e){
+window.onkeydown = e => {
   documentHeight = document.body.clientHeight,
   windowHeight = window.innerHeight,
   offsetTop = getOffsetY();
