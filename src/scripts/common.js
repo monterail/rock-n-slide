@@ -24,7 +24,7 @@ export function toggleVisibility(elem) {
   }
 };
 
-export function getOffsetY() { window.scrollY || window.pageYOffset };
+export function getOffsetY() { return window.scrollY || window.pageYOffset };
 
 // Apply Gradient Maps
 const elemsWithGradients = document.querySelectorAll('[data-gradient]');
