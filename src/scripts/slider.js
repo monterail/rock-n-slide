@@ -60,15 +60,28 @@ window.onresize = () => {
   assignSnapVariables();
 }
 
+let animationInProgress = false;
+
 window.onkeydown = e => {
-  documentHeight = document.body.clientHeight,
-  windowHeight = window.innerHeight,
+  function doAnimate(dir) {
+    if (animationInProgress) {
+      return;
+    }
+    animationInProgress = true;
+
+    animateScroll(calculateNearestSlide(dir), 400, 'easeInOutQuad', 0, 0, function () {
+      animationInProgress = false;
+    });
+  }
+
+  documentHeight = document.body.clientHeight;
+  windowHeight = window.innerHeight;
   offsetTop = getOffsetY();
   if(e.keyCode == 38){
     e.preventDefault();
-    animateScroll(calculateNearestSlide("up"), 400, 'easeInQuad');
-  }else if(e.keyCode == 40 || e.keyCode == 32){
+    doAnimate('up');
+  } else if(e.keyCode == 40 || e.keyCode == 32) {
     e.preventDefault();
-    animateScroll(calculateNearestSlide("down"), 400, 'easeInQuad');
+    doAnimate('down');
   }
 };
