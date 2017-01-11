@@ -1,15 +1,15 @@
 {
   "menu": {
-    "backgroundImg": "",
-    "gradient": "",
-    "backgroundColor": ""
+    "backgroundImg": "https://newevolutiondesigns.com/images/freebies/nature-hd-background-10.jpg",
+    "gradient": "#84e2d0, #E2F2F8"
   },
   "hero": {
-    "number": "",
-    "slot1": "",
+    "number": "2016",
+    "slot1": "# The main slide",
     "slot2": "",
-    "scrollingText": "",
-    "logoUrl": ""
+    "scrollingText": "Scroll down to see more",
+    "logoUrl": "",
+    "backgroundColor": "#ecf0f1"
   },
   "siteMeta": {
     "title": "",
@@ -33,13 +33,25 @@
   },
   "slides": [
     {
-      "menuItem": "",
-      "slot1": "",
-      "slot2": "",
-      "slot3": "",
-      "backgroundImg": "",
-      "gradient": "",
-      "backgroundColor": ""
+      "menuItem": "<strong>First menu item</strong>",
+      "slot1": "# Slide with background color",
+      "backgroundColor": "#9b59b6"
+    },
+    {
+      "menuItem": "Second menu item",
+      "number": "31",
+      "slot1": "# Slide with background image and gradient",
+      "slot2": "some <strong>additional</strong> text",
+      "backgroundImg": "http://hdwallpaperbackgrounds.net/wp-content/uploads/2016/07/Nature-background-12.jpg",
+      "gradient": "#9CD3E7, #E2F2F8"
+    },
+    {
+      "menuItem": "Third menu item",
+      "number": "400",
+      "slot1": "# Slide with multiple text lines",
+      "slot2": "## second line",
+      "slot3": "### third line",
+      "backgroundColor": "#3498db"
     }
   ]
 }
