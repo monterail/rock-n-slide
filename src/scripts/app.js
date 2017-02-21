@@ -10,10 +10,4 @@ let config = {
   lazyLoad: false
 }
 
-let dependency = {
-  animateScroll: animateScroll,
-  waypoints: require('waypoints'),
-  gradientMaps: require('./vendor/gradientmaps.min.js')
-};
-
-rockNslide.init(config, dependency);
+rockNslide.init(config);

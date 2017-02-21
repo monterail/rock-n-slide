@@ -1,4 +1,8 @@
 // Load dependencies in parameter
+import animateScroll from './vendor/animatescroll.min.js';
+import gradientMaps from './vendor/gradientmaps.min.js';
+import waypoints from 'waypoints';
+
 export var rockNslide = (function(){
   // CONFIG and VARIABLES
   const DEFAULT_CONFIG = {
@@ -20,7 +24,6 @@ export var rockNslide = (function(){
   let CONFIG = {};
   let animationInProgress = false;
   let elemsWithGradients = [];
-  let dependency = {};
   let isMenuOpen = false;
   let slides = [];
   let slidesWrapper;
@@ -32,23 +35,20 @@ export var rockNslide = (function(){
 
   // Check dependencies
   let checkDependencies = function(){
-    if(dependency.animateScroll == null || dependency.animateScroll == undefined){
-      dependency.animateScroll = false;
+    if(animateScroll == null || animateScroll == undefined){
       if(CONFIG.help == true){
         console.info("rockNslide: AnimationScroll is missing \n"+
           "Disabling sliding animations.");
       }
     }
-    if(dependency.waypoints == null || dependency.waypoints == undefined){
-      dependency.waypoints = false;
+    if(waypoints == null || waypoints == undefined){
       CONFIG.lazyLoad = false;
       if(CONFIG.help == true){
         console.info("rockNslide: Waypoint is missing \n"+
           "Disabling lazy load.");
       }
     }
-    if(dependency.gradientMaps == null || dependency.gradientMaps == undefined){
-      dependency.gradientMaps = false;
+    if(gradientMaps == null || gradientMaps == undefined){
       if(CONFIG.help == true){
         console.info("rockNslide: GradientMaps is missing \n"+
           "Disabling gradient maps.");
@@ -62,9 +62,8 @@ export var rockNslide = (function(){
   };
 
   let generateSlides = function() {
-    let slidesWrapper = document.getElementsByClassName(CONFIG.classList.slidesWrapper)[0];
-    let slides = slidesWrapper.getElementsByClassName(CONFIG.classList.slide);
-
+    slidesWrapper = document.getElementsByClassName(CONFIG.classList.slidesWrapper)[0];
+    slides = slidesWrapper.getElementsByClassName(CONFIG.classList.slide);
     assignSnapValues();
     applyGradientMaps(slidesWrapper);
   }
@@ -87,7 +86,7 @@ export var rockNslide = (function(){
         backgroundImage.removeAttribute('data-style');
       }
     };
-    if(dependency.waypoints){
+    if(waypoints){
       for(let i = 0; i < slides.length; i++){
         new Waypoint({
           element: slides[i],
@@ -99,7 +98,7 @@ export var rockNslide = (function(){
   }
 
   let applyGradientMaps = function(wrapper) {
-    if(dependency.gradientMaps){
+    if(gradientMaps){
       let elemsWithGradients = wrapper.querySelectorAll('[data-gradient]');
       for (var elem = 0; elem < elemsWithGradients.length; elem++) {
         const gradient = elemsWithGradients[elem].getAttribute('data-gradient');
@@ -127,7 +126,11 @@ export var rockNslide = (function(){
     }
   };
 
-  let toggleVisibility = function(elem) {
+  let toggleVisibility = function(elem, force) {
+    if(force){
+      elem.style.opacity = elem.style.opacity == 0 ? 1 : 0;
+      return;
+    }
     if (typeof elem !== "undefined" && elem !== null) {
       elem.style.opacity = getOffsetY() > 0 ? 0 : 1;
     }
@@ -135,11 +138,12 @@ export var rockNslide = (function(){
 
   // Sliding
   let slideTo = function(dir) {
+    // TODO return if reach beggining or end
     if (animationInProgress) {
       return;
     }
     animationInProgress = true;
-    dependency.animateScroll(calculateNearestSlide(dir), 400, 'easeInOutQuad', 0, 0, function () {
+    animateScroll(calculateNearestSlide(dir), 400, 'easeInOutQuad', 0, 0, function () {
       animationInProgress = false;
     });
   }
@@ -154,6 +158,7 @@ export var rockNslide = (function(){
     } else {
       body.style.overflow = "hidden";
     }
+    toggleVisibility(scrollText, true);
   };
 
   // scrollToTop
@@ -210,9 +215,8 @@ export var rockNslide = (function(){
   // Initialization
   // externalStuff should be an object containing
   // animateScroll, Waypoints and GradientMaps
-  let init = function(config, externalStuff) {
+  let init = function(config) {
     CONFIG = Object.assign({}, DEFAULT_CONFIG, config);
-    dependency = externalStuff;
     checkDependencies();
     generateDOMReferences();
     initWatchers();
