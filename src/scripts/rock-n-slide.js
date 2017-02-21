@@ -28,6 +28,7 @@ export var rockNslide = (function(){
   let mobileMenu;
   let menuItem;
   let scrollText;
+  let body;
 
   // Check dependencies
   let checkDependencies = function(){
@@ -69,6 +70,7 @@ export var rockNslide = (function(){
   }
 
   let generateDOMReferences = function() {
+    body = document.getElementsByTagName('body')[0];
     slidesWrapper = document.getElementsByClassName(CONFIG.classList.slidesWrapper)[0];
     mobileMenuTrigger = document.getElementsByClassName(CONFIG.classList.menuTrigger)[0];
     mobileMenu = document.getElementsByClassName(CONFIG.classList.menuSlide)[0];
@@ -77,6 +79,14 @@ export var rockNslide = (function(){
   }
 
   let assignSnapValues = function() {
+    let lazyImage = function(){
+      const backgroundImage = this.element.getElementsByClassName('slide-background__image')[0];
+      if(backgroundImage){
+        const newAttributes = `${backgroundImage.getAttribute('style')} ${backgroundImage.getAttribute('data-style')}`;
+        backgroundImage.setAttribute('style', newAttributes);
+        backgroundImage.removeAttribute('data-style');
+      }
+    };
     if(dependency.waypoints){
       for(let i = 0; i < slides.length; i++){
         new Waypoint({
@@ -117,13 +127,19 @@ export var rockNslide = (function(){
     }
   };
 
+  let toggleVisibility = function(elem) {
+    if (typeof elem !== "undefined" && elem !== null) {
+      elem.style.opacity = getOffsetY() > 0 ? 0 : 1;
+    }
+  };
+
   // Sliding
   let slideTo = function(dir) {
     if (animationInProgress) {
       return;
     }
     animationInProgress = true;
-    animateScroll(calculateNearestSlide(dir), 400, 'easeInOutQuad', 0, 0, function () {
+    dependency.animateScroll(calculateNearestSlide(dir), 400, 'easeInOutQuad', 0, 0, function () {
       animationInProgress = false;
     });
   }
@@ -167,6 +183,27 @@ export var rockNslide = (function(){
       window.onresize = () => {
         assignSnapValues();
       }
+    };
+    window.onkeydown = (e) => {
+      if(e.keyCode == 38){
+        e.preventDefault();
+        slideTo("up");
+      } else if(e.keyCode == 40 || e.keyCode == 32) {
+        e.preventDefault();
+        slideTo("down");
+      }
+    };
+    window.onscroll = () => {
+      toggleVisibility(scrollText);
+    };
+
+    mobileMenuTrigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleMobileMenu();
+    });
+
+    for (let i = 0; i < menuItem.length; i++) {
+      menuItem[i].addEventListener('click', toggleMobileMenu);
     }
   }
 
@@ -177,8 +214,8 @@ export var rockNslide = (function(){
     CONFIG = Object.assign({}, DEFAULT_CONFIG, config);
     dependency = externalStuff;
     checkDependencies();
-    initWatchers();
     generateDOMReferences();
+    initWatchers();
     generateSlides();
   };
 
