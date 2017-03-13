@@ -29,7 +29,7 @@ export var rockNslide = (function(){
   let slidesWrapper;
   let mobileMenuTrigger;
   let mobileMenu;
-  let menuItem;
+  let menuItems;
   let scrollText;
   let body;
 
@@ -66,6 +66,12 @@ export var rockNslide = (function(){
     slides = slidesWrapper.getElementsByClassName(CONFIG.classList.slide);
     assignSnapValues();
     applyGradientMaps(slidesWrapper);
+
+    const links = document.getElementsByTagName('a');
+    for (var i = 0; i < links.length; i++) {
+      if (!links[i].classList.contains('menu__nav-anchor'))
+        links[i].setAttribute('target', '_blank');
+      }
   }
 
   let generateDOMReferences = function() {
@@ -73,7 +79,7 @@ export var rockNslide = (function(){
     slidesWrapper = document.getElementsByClassName(CONFIG.classList.slidesWrapper)[0];
     mobileMenuTrigger = document.getElementsByClassName(CONFIG.classList.menuTrigger)[0];
     mobileMenu = document.getElementsByClassName(CONFIG.classList.menuSlide)[0];
-    menuItem = document.getElementsByClassName(CONFIG.classList.menuItem);
+    menuItems = document.getElementsByClassName(CONFIG.classList.menuItem);
     scrollText = document.getElementsByClassName(CONFIG.classList.scrollText)[0];
   }
 
@@ -207,8 +213,8 @@ export var rockNslide = (function(){
       toggleMobileMenu();
     });
 
-    for (let i = 0; i < menuItem.length; i++) {
-      menuItem[i].addEventListener('click', toggleMobileMenu);
+    for (let i = 0; i < menuItems.length; i++) {
+      menuItems[i].addEventListener('click', toggleMobileMenu);
     }
   }
 

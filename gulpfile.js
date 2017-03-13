@@ -23,7 +23,7 @@ gulp.task('browser-sync', function() {
   });
 });
 
-gulp.task('heroku-server', function(){
+gulp.task('prod-server', function(){
   browserSync({
     open: false,
     notify: false,
@@ -106,7 +106,7 @@ gulp.task('templates', function() {
 
 gulp.task('build', ['fonts', 'sass', 'js', 'templates', 'images']);
 
-gulp.task('serve', ['build', 'browser-sync'], function () {
+gulp.task('server', ['build', 'browser-sync'], function () {
   gulp.watch('src/stylesheets/**/*.{scss,sass}',['sass', reload]);
   gulp.watch('src/scripts/**/*.js',['js', reload]);
   gulp.watch('src/images/**/*',['images', reload]);
@@ -114,6 +114,6 @@ gulp.task('serve', ['build', 'browser-sync'], function () {
   gulp.watch('json/*.json',['templates', reload]);
 });
 
-gulp.task('heroku:prod', ['build', 'heroku-server']);
+gulp.task('server:prod', ['build', 'prod-server']);
 
 gulp.task('default', ['serve']);
