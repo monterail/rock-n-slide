@@ -1,55 +1,69 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Rock-n-slide by Monterail</title>
-  <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css"/>
-</head>
-<body>
-  <div class="wrapper">
-    <header class="cf">
-      <div class="col-1">
-        <h1>Rock-n-slide</h1>
-        <p class="with-love"><a href="http://monterail.com/" alt="love">with <img src="http://monterail.com/images/logo/Monterail-Logo-Vertical-Symbol%20emoticon%20hipchat.png"> by <strong>Monterail</strong></a></p>
-      </div>
-
-      <div class="col-2">
-        <p class="view">
-          <a href="https://github.com/monterail/rock-n-slide">
-            View the project on GitHub
-            <small>monterail/rock-n-slide</small>
-          </a>
-        </p>
-        <ul>
-          <li>
-            <a href="https://github.com/monterail/rock-n-slide/zip/master">
-              Download <strong>ZIP File</strong>
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/monterail/rock-n-slide/tarball/master">
-              Download <strong>TAR Ball</strong>
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/monterail/rock-n-slide">
-              Fork On <strong>GitHub</strong>
-            </a>
-          </li>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:image" content="">
+    <meta property="og:title" content="">
+    <meta property="og:site_name" content="">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="">
+    <meta property="twitter:image" content="">
+    <meta property="twitter:title" content="">
+    <meta property="twitter:description" content="">
+    <link rel="stylesheet" href="stylesheets/main.css">
+  </head>
+  <body><a href="#" class="menu-nav__trigger">
+      <ul class="menu-nav__hamburger">
+        <li class="menu-nav__hamburger-item"></li>
+        <li class="menu-nav__hamburger-item"></li>
+        <li class="menu-nav__hamburger-item"></li>
+      </ul></a>
+    <div class="slide slide--menu">
+      <div class="slide__content">
+        <ul class="menu__nav">
+          <li class="menu__nav-item"><a href="#0" class="menu__nav-anchor"><span><strong>First menu item</strong></span></a></li>
+          <li class="menu__nav-item"><a href="#1" class="menu__nav-anchor"><span>Second menu item</span></a></li>
+          <li class="menu__nav-item"><a href="#2" class="menu__nav-anchor"><span>Third menu item</span></a></li>
         </ul>
       </div>
-    </header>
-    <section>
-      <div>
-        <p>
-          Rock-n-slide is a set of scripts with gulp that generates site like slideshow or presentation. Edit <code>data.json</code> to make your slideshow and roll it.
-        </p>
+      <div style="background-image: url(https://newevolutiondesigns.com/images/freebies/nature-hd-background-10.jpg);" data-gradient="#84e2d0, #E2F2F8" class="slide-background slide-background__image slide-background__gradient"></div>
+    </div>
+    <div class="frame">
+      <div class="slide slide--hero">
+        <div class="slide__content">
+          <h1 class="slide__number slide__number--hero">2016</h1><h1 id="the-main-slide">The main slide</h1>
 
-        <h3>JSON</h3>
-        <script src="https://gist.github.com/Belir/1a7ec5fab57aec6db1ec.js"></script>
-    </section>
-    <footer>
-      <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-    </footer>
-  </div>
-</body>
+        </div>
+        <div class="slide__scrolling-text">Scroll down to see more</div>
+        <div style="background-color: #ecf0f1;" class="slide-background slide-background__color"></div>
+      </div>
+          <div id="0" class="slide">
+            <div class="slide__content"><h1 id="slide-with-background-color">Slide with background color</h1>
+
+            </div>
+            <div style="background-color: #9b59b6;" class="slide-background slide-background__color"></div>
+          </div>
+          <div id="1" class="slide">
+            <div class="slide__content"><span class="slide__number typo--number">31</span><h1 id="slide-with-background-image-and-gradient">Slide with background image and gradient</h1>
+<p>some <strong>additional</strong> text</p>
+
+            </div>
+            <div data-style="background-image: url(http://hdwallpaperbackgrounds.net/wp-content/uploads/2016/07/Nature-background-12.jpg);" data-gradient="#9CD3E7, #E2F2F8" class="slide-background slide-background__image slide-background__gradient"></div>
+          </div>
+          <div id="2" class="slide">
+            <div class="slide__content"><span class="slide__number typo--number">400</span><h1 id="slide-with-multiple-text-lines">Slide with multiple text lines</h1>
+<h2 id="second-line">second line</h2>
+<h3 id="third-line">third line</h3>
+
+            </div>
+            <div style="background-color: #3498db;" class="slide-background slide-background__color"></div>
+          </div>
+    </div>
+    <script src="scripts/app.js"></script>
+  </body>
 </html>
