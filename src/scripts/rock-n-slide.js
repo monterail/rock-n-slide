@@ -9,6 +9,7 @@ export var rockNslide = (function(){
     speed: 400,
     animationType: 'easeInOutQuad',
     lazyLoad: true,
+    animateSliding: true,
     help: true,
     classList: {
       slidesWrapper:     "frame",
@@ -36,6 +37,7 @@ export var rockNslide = (function(){
   // Check dependencies
   let checkDependencies = function(){
     if(animateScroll == null || animateScroll == undefined){
+      CONFIG.animateSliding = false;
       if(CONFIG.help == true){
         console.info("rockNslide: AnimationScroll is missing \n"+
           "Disabling sliding animations.");
@@ -145,7 +147,7 @@ export var rockNslide = (function(){
   // Sliding
   let slideTo = function(dir) {
     // TODO return if reach beggining or end
-    if (animationInProgress) {
+    if (animationInProgress || !CONFIG.animateSliding) {
       return;
     }
     animationInProgress = true;
@@ -169,7 +171,7 @@ export var rockNslide = (function(){
 
   // scrollToTop
   let scrollToTop = function() {
-    if (animationInProgress) {
+    if (animationInProgress || !CONFIG.animateSliding) {
       return;
     }
     animationInProgress = true;
