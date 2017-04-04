@@ -33,25 +33,13 @@
   },
   "slides": [
     {
-      "menuItem": "<strong>First menu item</strong>",
-      "slot1": "# Slide with background color",
-      "backgroundColor": "#9b59b6"
-    },
-    {
-      "menuItem": "Second menu item",
-      "number": "31",
-      "slot1": "# Slide with background image and gradient",
-      "slot2": "some <strong>additional</strong> text",
-      "backgroundImg": "http://hdwallpaperbackgrounds.net/wp-content/uploads/2016/07/Nature-background-12.jpg",
-      "gradient": "#9CD3E7, #E2F2F8"
-    },
-    {
-      "menuItem": "Third menu item",
+      "menuItem": "Menu title",
       "number": "400",
       "slot1": "# Slide with multiple text lines",
       "slot2": "## second line",
       "slot3": "### third line",
-      "backgroundColor": "#3498db"
+      "backgroundColor": "#3498db",
+      "backgroundImg": "https://d3h3d5v3u20fyx.cloudfront.net/retro2015/books.jpg"
     }
   ]
 }
