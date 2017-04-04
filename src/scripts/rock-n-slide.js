@@ -138,7 +138,7 @@ export var rockNslide = (function(){
       return;
     }
     if (typeof elem !== "undefined" && elem !== null) {
-      elem.style.opacity = getOffsetY() > 0 ? 0 : 1;
+      elem.style.opacity = getOffsetY() > 30 ? 0 : 1;
     }
   };
 

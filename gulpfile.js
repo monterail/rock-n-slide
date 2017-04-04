@@ -116,4 +116,4 @@ gulp.task('server', ['build', 'browser-sync'], function () {
 
 gulp.task('server:prod', ['build', 'prod-server']);
 
-gulp.task('default', ['serve']);
+gulp.task('default', ['server']);
